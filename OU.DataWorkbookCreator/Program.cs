@@ -20,8 +20,12 @@ namespace OU.DataWorkbookCreator
             if (!Directory.Exists(outputDirectory))
                 Directory.CreateDirectory(outputDirectory);
             string outputFullPath = Path.Combine(outputDirectory, outputFileName);
-            if(File.Exists(inputPath))
+            if (File.Exists(inputPath))
                 System.IO.File.Copy(inputPath, outputFullPath, true);
+            //else
+            //{
+            //    var workbookCreator = new WorkbookCreator();
+            //}
             return outputFullPath;
         }
 
@@ -31,8 +35,11 @@ namespace OU.DataWorkbookCreator
 
             //Class members
             var workbookCreator = new Program();
-            Spread
+            SpreadsheetHelper spreadsheetHelper = new SpreadsheetHelper();
+           
+            string fileName = workbookCreator.CreateTemplateCopy(args);
 
+            Console.ReadKey();
         }
     }
 }
