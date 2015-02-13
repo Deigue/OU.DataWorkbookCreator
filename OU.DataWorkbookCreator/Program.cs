@@ -7,6 +7,8 @@ using System.IO;
 using DocumentFormat.OpenXml;
 using DocumentFormat.OpenXml.Packaging;
 using DocumentFormat.OpenXml.Spreadsheet;
+using OU.DataWorkbookCreator.Utilities;
+
 
 namespace OU.DataWorkbookCreator
 {
@@ -16,16 +18,19 @@ namespace OU.DataWorkbookCreator
         {
             string outputDirectory = output[0];
             string outputFileName = output[1];
-            string inputPath = @"../../Template/Template.xlsx";
+            string inputFullPath=null;
+
+            if(output.Length==3)
+                inputFullPath = output[2];
+
             if (!Directory.Exists(outputDirectory))
                 Directory.CreateDirectory(outputDirectory);
             string outputFullPath = Path.Combine(outputDirectory, outputFileName);
-            if (File.Exists(inputPath))
-                System.IO.File.Copy(inputPath, outputFullPath, true);
-            //else
-            //{
-            //    var workbookCreator = new WorkbookCreator();
-            //}
+            if (File.Exists(inputFullPath))
+                System.IO.File.Copy(inputFullPath, outputFullPath, true);
+            else
+                CreateSpreadsheetWorkbook.WorkbookCreator(outputFullPath);
+                
             return outputFullPath;
         }
 
@@ -38,6 +43,7 @@ namespace OU.DataWorkbookCreator
             SpreadsheetHelper spreadsheetHelper = new SpreadsheetHelper();
            
             string fileName = workbookCreator.CreateTemplateCopy(args);
+            
 
             Console.ReadKey();
         }

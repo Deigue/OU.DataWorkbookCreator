@@ -7,7 +7,7 @@ using DocumentFormat.OpenXml;
 using DocumentFormat.OpenXml.Packaging;
 using DocumentFormat.OpenXml.Spreadsheet;
 
-namespace OU.DataWorkbookCreator
+namespace OU.DataWorkbookCreator.Utilities
 {
     class SpreadsheetHelper
     {
