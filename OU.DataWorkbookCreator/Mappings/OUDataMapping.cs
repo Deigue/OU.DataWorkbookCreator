@@ -7,7 +7,7 @@ using OU.DataWorkbookCreator.Models;
 
 namespace OU.DataWorkbookCreator.Mappings
 {
-    class OUDataMapping
+    public class OUDataMapping
     {
         public SummaryModel MapToSummaryModel(double orgUnit, double amount)
         {
