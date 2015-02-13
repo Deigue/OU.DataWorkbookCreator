@@ -60,7 +60,7 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Models\DetailsReportData.cs" />
+    <Compile Include="Models\DetailReportModel.cs" />
     <Compile Include="Models\FootingsModel.cs" />
     <Compile Include="Models\FXRatesModel.cs" />
     <Compile Include="Models\SummaryModel.cs" />
