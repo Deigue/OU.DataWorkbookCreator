@@ -8,6 +8,7 @@ using DocumentFormat.OpenXml;
 using DocumentFormat.OpenXml.Packaging;
 using DocumentFormat.OpenXml.Spreadsheet;
 using OU.DataWorkbookCreator.Utilities;
+using OU.DataWorkbookCreator.Repository;
 
 
 namespace OU.DataWorkbookCreator
@@ -41,11 +42,37 @@ namespace OU.DataWorkbookCreator
             //Class members
             var workbookCreator = new Program();
             var spreadsheetHelper = new SpreadsheetHelper();
-           
-            string fileName = workbookCreator.CreateTemplateCopy(args);
-            
+            var testRepository = new TestRepository();
+            var sheetFiller = new FillSheets();
 
-            Console.ReadKey();
+            string fileName = workbookCreator.CreateTemplateCopy(args);
+
+            using (SpreadsheetDocument spreadsheet = SpreadsheetDocument.Open(fileName, true))
+            {
+                var workbookPart = spreadsheet.WorkbookPart;
+
+                //Sheet IDs:
+                var summary = spreadsheetHelper.GetWorkSheetPart(workbookPart, "Summary");
+                var footings = spreadsheetHelper.GetWorkSheetPart(workbookPart, "Footings");
+                var detailReport = spreadsheetHelper.GetWorkSheetPart(workbookPart, "Detail Report");
+                var fxrates = spreadsheetHelper.GetWorkSheetPart(workbookPart, "FX Rates");
+
+                //Populate workbook with Repo Data:
+                sheetFiller.InsertIntoSummary(summary, testRepository.SummaryList());
+                sheetFiller.InsertIntoFootings(footings, testRepository.FootingsList());
+                sheetFiller.InsertIntoDetailReport(detailReport, testRepository.DetailReportList());
+                sheetFiller.InsertIntoFXRates(fxrates, testRepository.FXRatesListToday(), testRepository.FXRatesListYesterday());
+
+                //Force Calculations before save:
+                spreadsheet.WorkbookPart.Workbook.CalculationProperties.ForceFullCalculation = true;
+                spreadsheet.WorkbookPart.Workbook.CalculationProperties.CalculationOnSave = true;
+                spreadsheet.WorkbookPart.Workbook.CalculationProperties.FullCalculationOnLoad = true;
+                spreadsheet.WorkbookPart.Workbook.Save();
+                
+                Console.WriteLine(String.Format("Workbook has been created in {0}{1}", args[0], args[1]));
+                Console.Write("Press Any Key to Continue... ");
+                Console.ReadKey();
+            }                  
         }
     }
 }

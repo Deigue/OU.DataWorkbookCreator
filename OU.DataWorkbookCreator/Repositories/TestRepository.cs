@@ -11,11 +11,9 @@ namespace OU.DataWorkbookCreator.Repository
     class TestRepository : OUDataMapping
     {
         
-        public static List<SummaryModel> SummaryList()
+        public List<SummaryModel> SummaryList()
         {
-            var summaryList = new List<SummaryModel>();
-            
-            
+            var summaryList = new List<SummaryModel>();                      
             summaryList.Add(MapToSummaryModel(12,65346));
             summaryList.Add(MapToSummaryModel(200, 646));
             summaryList.Add(MapToSummaryModel(2, 653246));
@@ -29,7 +27,7 @@ namespace OU.DataWorkbookCreator.Repository
             return summaryList;
         }
 
-        static List<FootingsModel> FootingsList()
+        public List<FootingsModel> FootingsList()
         {
             var footingsList = new List<FootingsModel>();
             footingsList.Add(MapToFootingsModel("TEMPORARY COMPANY", "22323", "JPY", 3415135.325, 0.01, 6464321.34, 0.02));
@@ -43,7 +41,7 @@ namespace OU.DataWorkbookCreator.Repository
             return footingsList;
         }
 
-        static List<DetailReportModel> DetailReportList()
+        public List<DetailReportModel> DetailReportList()
         {
             var detailReportList = new List<DetailReportModel>();
             detailReportList.Add(MapToDetailReportModel("DESK A", "11111", "EUR", "1234152", "0001", "A0000", 12345.54, 31245.23));
@@ -62,7 +60,7 @@ namespace OU.DataWorkbookCreator.Repository
             return detailReportList;
         }
 
-        static List<FXRatesModel> FXRatesListToday()
+        public List<FXRatesModel> FXRatesListToday()
         {
             var fxRatesListToday = new List<FXRatesModel>();
             fxRatesListToday.Add(MapToFXRatesModel("BRL",1.81D));
@@ -77,7 +75,7 @@ namespace OU.DataWorkbookCreator.Repository
             return fxRatesListToday;         
         }
 
-        static List<FXRatesModel> FXRatesListYesterday()
+        public List<FXRatesModel> FXRatesListYesterday()
         {
             var fxRatesListYesterday = new List<FXRatesModel>();
             fxRatesListYesterday.Add(MapToFXRatesModel("CLP", 504.27D));
