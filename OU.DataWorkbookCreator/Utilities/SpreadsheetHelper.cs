@@ -11,6 +11,38 @@ namespace OU.DataWorkbookCreator.Utilities
 {
     class SpreadsheetHelper
     {
+        private Cell GetCell(WorksheetPart worksheetPart, uint correction, uint rowIndex, char column)
+        {
+            Row row = GetRow(worksheetPart, correction, rowIndex);
+
+            //New Row
+            if (row == null)
+            {
+                row = new Row() { RowIndex = rowIndex };
+                Cell cell = new Cell();
+                string cellIndex = column + rowIndex.ToString();
+                cell.CellReference = cellIndex;
+                row.AppendChild(cell);
+                SheetData sheetData = worksheetPart.Worksheet.GetFirstChild<SheetData>();
+                sheetData.AppendChild(row);
+                return cell;
+            }
+            //Cell exists in Row
+            else if ((int)column - 64 <= row.Elements<Cell>().Count())
+            {
+                return row.Elements<Cell>().Where(cell => string.Compare(cell.CellReference.Value, column.ToString() + rowIndex, true) == 0).First();
+            }
+            //Inserts Cell into existing Row
+            else
+            {
+                Cell cell = new Cell();
+                string cellIndex = column + rowIndex.ToString();
+                cell.CellReference = cellIndex;
+                row.AppendChild(cell);
+                return cell;
+            }
+        }
+
         public WorksheetPart GetWorkSheetPart(WorkbookPart workbookPart, string sheetName)
         {
             string relevantId = workbookPart.Workbook.Descendants<Sheet>().First(s => sheetName.Equals(s.Name)).Id;
@@ -27,39 +59,7 @@ namespace OU.DataWorkbookCreator.Utilities
                 return null;
         }
 
-        private Cell GetCell(WorksheetPart worksheetPart, uint correction, uint rowIndex, char column)
-        {
-            Row row = GetRow(worksheetPart, correction, rowIndex);
-
-            //New Row
-            if (row == null)
-            {                
-                row = new Row() { RowIndex = rowIndex };
-                Cell cell = new Cell();
-                string cellIndex = column + rowIndex.ToString();
-                cell.CellReference = cellIndex;
-                row.AppendChild(cell);
-                SheetData sheetData = worksheetPart.Worksheet.GetFirstChild<SheetData>();
-                sheetData.AppendChild(row);
-                return cell;
-            }
-            //Cell exists in Row
-            else if((int)column-64 <= row.Elements<Cell>().Count())
-            {
-                return row.Elements<Cell>().Where(cell => string.Compare(cell.CellReference.Value, column.ToString() + rowIndex, true)==0).First();
-            }
-            //Inserts Cell into existing Row
-            else
-            {
-                Cell cell = new Cell();
-                string cellIndex = column + rowIndex.ToString();
-                cell.CellReference= cellIndex;
-                row.AppendChild(cell);
-                return cell;
-            }
-        }
-
-        public void UpdateCell(WorksheetPart worksheetPart, uint correction, string cellData, uint rowIndex, char column, int cellType, uint style)
+        public void UpdateCell(WorksheetPart worksheetPart, uint correction, uint rowIndex, char column, int cellType, uint style, string cellData)
         {
             Cell cell = GetCell(worksheetPart, correction, rowIndex, column);
             cell.CellValue = new CellValue(cellData);
@@ -88,5 +88,5 @@ namespace OU.DataWorkbookCreator.Utilities
             cell.Append(cellFormula);
             cell.Append(value);
         }
-    }//Class
-}//Namespace
+    }
+}

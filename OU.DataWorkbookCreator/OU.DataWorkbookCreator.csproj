@@ -67,6 +67,7 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Utilities\CreateSpreadsheetWorkbook.cs" />
+    <Compile Include="Utilities\FillSheets.cs" />
     <Compile Include="Utilities\SpreadsheetHelper.cs" />
   </ItemGroup>
   <ItemGroup>

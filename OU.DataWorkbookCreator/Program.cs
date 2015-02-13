@@ -12,7 +12,7 @@ using OU.DataWorkbookCreator.Utilities;
 
 namespace OU.DataWorkbookCreator
 {
-    public class Program
+    class Program: CreateSpreadsheetWorkbook
     {
         private string CreateTemplateCopy(string[] output)
         {
@@ -29,7 +29,7 @@ namespace OU.DataWorkbookCreator
             if (File.Exists(inputFullPath))
                 System.IO.File.Copy(inputFullPath, outputFullPath, true);
             else
-                CreateSpreadsheetWorkbook.WorkbookCreator(outputFullPath);
+                WorkbookCreator(outputFullPath);
                 
             return outputFullPath;
         }
@@ -40,7 +40,7 @@ namespace OU.DataWorkbookCreator
 
             //Class members
             var workbookCreator = new Program();
-            SpreadsheetHelper spreadsheetHelper = new SpreadsheetHelper();
+            var spreadsheetHelper = new SpreadsheetHelper();
            
             string fileName = workbookCreator.CreateTemplateCopy(args);
             

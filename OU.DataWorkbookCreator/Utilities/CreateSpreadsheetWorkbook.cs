@@ -9,13 +9,13 @@ using System.Threading.Tasks;
 
 namespace OU.DataWorkbookCreator.Utilities
 {
-    static class CreateSpreadsheetWorkbook
+    public class CreateSpreadsheetWorkbook
     {
-        static public void WorkbookCreator(string filepath)
+        public void WorkbookCreator(string filepath)
         {
             // Create a spreadsheet document by supplying the filepath.
             // By default, AutoSave = true, Editable = true, and Type = xlsx.
-            SpreadsheetDocument spreadsheetDocument = SpreadsheetDocument.Create(filepath, SpreadsheetDocumentType.Workbook);
+            var spreadsheetDocument = SpreadsheetDocument.Create(filepath, SpreadsheetDocumentType.Workbook);
 
             // Add a WorkbookPart to the document.
             WorkbookPart workbookpart = spreadsheetDocument.AddWorkbookPart();
@@ -29,7 +29,7 @@ namespace OU.DataWorkbookCreator.Utilities
             Sheets sheets = spreadsheetDocument.WorkbookPart.Workbook.AppendChild<Sheets>(new Sheets());
 
             // Append a new worksheet and associate it with the workbook.
-            Sheet sheet = new Sheet() { Id = spreadsheetDocument.WorkbookPart.GetIdOfPart(worksheetPart), SheetId = 1, Name = "mySheet" };
+            var sheet = new Sheet() { Id = spreadsheetDocument.WorkbookPart.GetIdOfPart(worksheetPart), SheetId = 1, Name = "mySheet" };
             sheets.Append(sheet);
 
             workbookpart.Workbook.Save();
