@@ -10,6 +10,7 @@ using DocumentFormat.OpenXml.Spreadsheet;
 using OU.DataWorkbookCreator.Utilities;
 using OU.DataWorkbookCreator.Repository;
 
+//E:\Projects\OU.DataWorkbookCreator\OU.DataWorkbookCreator\InputFiles\Input.xlsx @InputPath
 
 namespace OU.DataWorkbookCreator
 {
@@ -29,8 +30,8 @@ namespace OU.DataWorkbookCreator
             string outputFullPath = Path.Combine(outputDirectory, outputFileName);
             if (File.Exists(inputFullPath))
                 System.IO.File.Copy(inputFullPath, outputFullPath, true);
-            else
-                WorkbookCreator(outputFullPath);
+            //else
+            //    WorkbookCreator(outputFullPath);
                 
             return outputFullPath;
         }

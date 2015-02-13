@@ -57,7 +57,7 @@ namespace OU.DataWorkbookCreator.Utilities
         {
             int existingRows = worksheetPart.Worksheet.GetFirstChild<SheetData>().Elements<Row>().Count();
             var sortedSummaryList = summaryList.OrderBy(x => x.OrgUnit).ThenBy(x => x.Amount).ToList();
-            uint rowIndex = 7;
+            uint rowIndex = 1;
             uint correction = Convert.ToUInt32(rowIndex - 1 - existingRows); //Correction Factor
 
             foreach (SummaryModel summaryModel in sortedSummaryList)
@@ -77,7 +77,7 @@ namespace OU.DataWorkbookCreator.Utilities
             bool listEntry = true;
             int deskCounter =1;
             string previousDesk = null;
-            uint rowIndex = 6;
+            uint rowIndex = 1;
             uint correction = Convert.ToUInt32(rowIndex - 1 - existingRows); //Correction Factor
             uint deskStartRowIndex = rowIndex;
 
@@ -145,7 +145,7 @@ namespace OU.DataWorkbookCreator.Utilities
             bool listEntry = true;
             int deskCounter = 1;
             string previousDesk = null;
-            uint rowIndex = 6;
+            uint rowIndex = 1;
             uint correction = Convert.ToUInt32(rowIndex - 1 - existingRows); //Correction Factor
             uint deskStartRowIndex = rowIndex;
 
@@ -213,7 +213,7 @@ namespace OU.DataWorkbookCreator.Utilities
             int existingRows = worksheetPart.Worksheet.GetFirstChild<SheetData>().Elements<Row>().Count();
             var sortedTodayList = fxratesTodayList.OrderBy(x => x.CCY).ToList();
             var sortedYesterdayList = fxratesYesterdayList.OrderBy(x => x.CCY).ToList();
-            uint rowIndex = 3;
+            uint rowIndex = 1;
             uint correction = Convert.ToUInt32(rowIndex - 1 - existingRows);
 
             foreach (FXRatesModel fxratesModel in sortedTodayList)

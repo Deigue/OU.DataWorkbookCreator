@@ -24,20 +24,13 @@ namespace OU.DataWorkbookCreator.Utilities
             // Add a WorksheetPart to the WorkbookPart.
             WorksheetPart worksheetPart = workbookpart.AddNewPart<WorksheetPart>();
             worksheetPart.Worksheet = new Worksheet(new SheetData());
-
+                        
             // Add Sheets to the Workbook.
             Sheets sheets = spreadsheetDocument.WorkbookPart.Workbook.AppendChild<Sheets>(new Sheets());
 
             // Append a new worksheet and associate it with the workbook.
             var summary = new Sheet() { Id = spreadsheetDocument.WorkbookPart.GetIdOfPart(worksheetPart), SheetId = 1, Name = "Summary" };
-            var footings = new Sheet() { Id = spreadsheetDocument.WorkbookPart.GetIdOfPart(worksheetPart), SheetId = 1, Name = "Footings" };
-            var detailReport = new Sheet() { Id = spreadsheetDocument.WorkbookPart.GetIdOfPart(worksheetPart), SheetId = 1, Name = "Detail Report" };
-            var fxrates = new Sheet() { Id = spreadsheetDocument.WorkbookPart.GetIdOfPart(worksheetPart), SheetId = 1, Name = "FX Rates" };
-            sheets.Append(summary);
-            sheets.Append(footings);
-            sheets.Append(detailReport);
-            sheets.Append(fxrates);
-
+            sheets.Append(summary);       
             workbookpart.Workbook.Save();
 
             // Close the document.
