@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace OU.DataWorkbookCreator.Models
 {
-    class FXRatesModel
+    public class FXRatesModel
     {
         public string CCY { get; set; }
         public double Rate { get; set; }

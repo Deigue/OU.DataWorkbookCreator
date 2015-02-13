@@ -7,9 +7,9 @@ using OU.DataWorkbookCreator.Models;
 
 namespace OU.DataWorkbookCreator.Mappings
 {
-    public class OUDataMapping
-    {
-        public SummaryModel MapToSummaryModel(double orgUnit, double amount)
+    abstract class OUDataMapping
+    {        
+        public static SummaryModel MapToSummaryModel(double orgUnit, double amount)
         {
             var summaryModel = new SummaryModel();
             summaryModel.OrgUnit = orgUnit;
@@ -17,7 +17,7 @@ namespace OU.DataWorkbookCreator.Mappings
             return summaryModel;
         }
 
-        public FootingsModel MapToFootingsModel(string desk, string orgUnit, string CCY, double CGLM, double CAdjustment, double T1GLM, double T1Ajustment)
+        public static FootingsModel MapToFootingsModel(string desk, string orgUnit, string CCY, double CGLM, double CAdjustment, double T1GLM, double T1Ajustment)
         {
             var footingsModel = new FootingsModel();
             footingsModel.Desk = desk;
@@ -30,7 +30,7 @@ namespace OU.DataWorkbookCreator.Mappings
             return footingsModel;
         }
 
-        public DetailReportModel MapToDetailReportModel(string desk, string orgUnit, string CCY, string account, string product, string custGroup, double CGLM, double T1GLM)
+        public static DetailReportModel MapToDetailReportModel(string desk, string orgUnit, string CCY, string account, string product, string custGroup, double CGLM, double T1GLM)
         {
             var detailReportModel = new DetailReportModel();
             detailReportModel.Desk = desk;
@@ -43,7 +43,7 @@ namespace OU.DataWorkbookCreator.Mappings
             return detailReportModel;
         }
 
-        public FXRatesModel MapToFXRatesModel(string CCY, double rate)
+        public static FXRatesModel MapToFXRatesModel(string CCY, double rate)
         {
             var fxRatesModel = new FXRatesModel();
             fxRatesModel.CCY = CCY;

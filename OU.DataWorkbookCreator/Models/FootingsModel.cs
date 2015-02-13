@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace OU.DataWorkbookCreator.Models
 {
-    class FootingsModel
+    public class FootingsModel
     {
         public string Desk { get; set; }
         public string OrgUnit { get; set; }
